@@ -1,0 +1,39 @@
+{% extends "layout/appLayout.html" %}
+
+{% block title %}Schedule Details{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Schedule Details</h2>
+
+    <table class="table table-bordered">
+        <tr>
+            <th>Class</th>
+            <td>{{ schedule.class.name }}</td>
+        </tr>
+        <tr>
+            <th>Subject</th>
+            <td>{{ schedule.subject.name }}</td>
+        </tr>
+        <tr>
+            <th>Teacher</th>
+            <td>{{ schedule.teacher.user.first_name }} {{ schedule.teacher.user.last_name }}</td>
+        </tr>
+        <tr>
+            <th>Day of Week</th>
+            <td>{{ schedule.day_of_week }}</td>
+        </tr>
+        <tr>
+            <th>Start Time</th>
+            <td>{{ schedule.start_time }}</td>
+        </tr>
+        <tr>
+            <th>End Time</th>
+            <td>{{ schedule.end_time }}</td>
+        </tr>
+    </table>
+
+    <a href="/eSchool/public/schedules/edit?id={{ schedule.id }}" class="btn btn-warning">Edit</a>
+    <a href="/eSchool/public/schedules" class="btn btn-secondary">Back to List</a>
+</div>
+{% endblock %}

@@ -1,0 +1,128 @@
+/* General Sidebar Gradient */
+.bg-gradient-primary {
+  background: linear-gradient(135deg, #2c5364, #203a43, #0f2027);
+}
+
+/* Card Gradients */
+.gradient-blue {
+  background: linear-gradient(to right, #3b82f6, #60a5fa);
+}
+
+.gradient-green {
+  background: linear-gradient(to right, #10b981, #34d399);
+}
+
+.gradient-orange {
+  background: linear-gradient(to right, #f97316, #fb923c);
+}
+
+.gradient-red {
+  background: linear-gradient(to right, #ef4444, #f87171);
+}
+
+/* Sidebar Nav Styles */
+#sidebar .nav-link {
+  font-weight: 500;
+  padding: 10px 15px;
+  border-radius: 8px;
+}
+
+#sidebar .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  text-decoration: none;
+}
+
+/* Main Header */
+header {
+  border-bottom: 1px solid #ddd;
+}
+
+/* Card Titles */
+.card-title {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+#enrollmentChart {
+  display: block;
+  width: 100% !important;
+  height: 300px !important;
+}
+
+.left-area {
+  background-color: #c9ecff;
+  position: relative;
+}
+
+.school-illustration {
+  background: linear-gradient(to top, #78c257, #c6f1c8);
+  border-top: 2px solid #333;
+}
+
+
+.account-box {
+  height: 60px;
+  opacity: 0.95;
+}
+
+.text-purple {
+  color: #a066cc;
+}
+
+/*Student Dasbboard*/
+.custom-body{
+  background-color: #323334;
+}
+:root {
+    --primary-gradient: linear-gradient(135deg, #2c5364, #203a43, #0f2027);
+    --dark-color: #1f2937;
+    --text-color: white;
+}
+.navbar-custom {
+  background: var(--primary-gradient);
+  height: 150px;
+}
+.navbar-toggler {
+  border: none;
+}
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 30 30' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='white' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3E%3C/svg%3E");
+}
+.navbar-collapse {
+  padding-top: 20px;
+  background: var(--primary-gradient);
+}
+.avatar-circle {
+  background-color: #fff;
+  color: #111827;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+/*Student Dasbboard*/
+
+/* Stili për mesazhet e gabimit të jQuery Validate */
+label.error {
+  color: #dc3545;        /* Ngjyra e kuqe Bootstrap për gabime */
+  font-size: 0.875rem;   /* Pak më i vogël se teksti normal */
+  margin-top: 0.25rem;   /* Hapësirë poshtë input-it */
+  display: block;        /* Shfaq si bllok, poshtë input-it */
+  font-weight: 500;      /* Pak më i trashë */
+  font-family: Arial, sans-serif;
+}
+
+/* Opsionale: vendos border të kuq tek input me gabim */
+input.error, select.error, textarea.error {
+  border-color: #dc3545;
+  box-shadow: 0 0 5px rgba(220, 53, 69, 0.5);
+}
+
+/* Opcionale: kur input ka fokus, ruaj border normal */
+input.error:focus, select.error:focus, textarea.error:focus {
+  border-color: #dc3545;
+  box-shadow: 0 0 8px rgba(220, 53, 69, 0.75);
+  outline: none;
+}

@@ -1,0 +1,41 @@
+{% extends 'layout/appLayout.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Add New Teacher</h2>
+    <form method="POST" action="/eSchool/public/teachers/store">
+        <div class="mb-3">
+            <label for="user_id" class="form-label">Select User (Teacher Role)</label>
+            <select class="form-select" id="user_id" name="user_id" required>
+                <option value="" selected disabled>Select a user</option>
+                {% for user in users %}
+                <option value="{{ user.id }}">{{ user.first_name }} {{ user.last_name }} ({{ user.email }})</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="subject_specialty" class="form-label">Subject Specialty</label>
+            <input type="text" class="form-control" id="subject_specialty" name="subject_specialty" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="date_of_birth" class="form-label">Date of Birth</label>
+            <input type="date" class="form-control" id="date_of_birth" name="date_of_birth" required>
+        </div>
+
+       <div class="mb-3">
+            <label for="gender" class="form-label">Gender</label>
+            <select class="form-select" id="gender" name="gender" required>
+                <option value="" selected disabled>Select gender</option>
+                {% for key, label in genders %}
+                <option value="{{ key }}">{{ label }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Add</button>
+        <a href="/eSchool/public/teachers" class="btn btn-secondary ms-2">Cancel</a>
+    </form>
+</div>
+{% endblock %}

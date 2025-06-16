@@ -1,0 +1,15 @@
+{% extends "layout/appLayout.html" %}
+
+{% block content %}
+<h1><i class="bi bi-building me-2"></i>Add New Class</h1>
+
+<form action="/eSchool/public/classes/store" method="post">
+  <div class="mb-3">
+    <label for="name" class="form-label">Class Name</label>
+    <input type="text" id="name" name="name" class="form-control" required>
+  </div>
+
+  <button type="submit" class="btn btn-success">Save</button>
+  <a href="/eSchool/public/classes" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}

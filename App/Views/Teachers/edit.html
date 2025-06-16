@@ -1,0 +1,45 @@
+{% extends 'layout/appLayout.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Edit Teacher: {{ teacher.user.first_name }} {{ teacher.user.last_name }}</h2>
+    <form method="POST" action="/eSchool/public/teachers/update">
+        <input type="hidden" name="id" value="{{ teacher.id }}">
+
+        <div class="mb-3">
+            <label for="user_id" class="form-label">Select User (Teacher Role)</label>
+            <select class="form-select" id="user_id" name="user_id" required>
+                <option value="" disabled>Select a user</option>
+                {% for user in users %}
+                    <option value="{{ user.id }}" {% if user.id == teacher.user_id %}selected{% endif %}>
+                        {{ user.first_name }} {{ user.last_name }} ({{ user.email }})
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="subject_specialty" class="form-label">Subject Specialty</label>
+            <input type="text" class="form-control" id="subject_specialty" name="subject_specialty" required value="{{ teacher.subject_specialty }}">
+        </div>
+
+        <div class="mb-3">
+            <label for="date_of_birth" class="form-label">Date of Birth</label>
+            <input type="date" class="form-control" id="date_of_birth" name="date_of_birth" required value="{{ teacher.date_of_birth|date("Y-m-d") }}">
+        </div>
+
+        <div class="mb-3">
+            <label for="gender" class="form-label">Gender</label>
+            <select class="form-select" id="gender" name="gender" required>
+                <option value="" disabled>Select gender</option>
+                {% for key, label in genders %}
+                    <option value="{{ key }}" {% if teacher.gender == key %}selected{% endif %}>{{ label }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Update</button>
+        <a href="/eSchool/public/teachers" class="btn btn-secondary ms-2">Cancel</a>
+    </form>
+</div>
+{% endblock %}

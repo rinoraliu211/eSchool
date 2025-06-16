@@ -1,0 +1,37 @@
+{% extends 'layout/appLayout.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Teacher Details: {{ teacher.user.first_name }} {{ teacher.user.last_name }}</h2>
+    <p><strong>Subject Specialty:</strong> {{ teacher.subject_specialty }}</p>
+    <p><strong>Date of Birth:</strong> {{ teacher.date_of_birth|date("Y-m-d") }}</p>
+    <p><strong>Gender:</strong> {{ teacher.gender|capitalize }}</p>
+    <p><strong>Email:</strong> {{ teacher.user.email }}</p>
+
+    <hr>
+    <h4>Subjects</h4>
+    {% if teacher.subjects is not empty %}
+    <ul>
+        {% for subject in teacher.subjects %}
+        <li>{{ subject.name }}</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No subjects assigned.</p>
+    {% endif %}
+
+    <hr>
+    <h4>Schedules</h4>
+    {% if teacher.schedules is not empty %}
+    <ul>
+        {% for schedule in teacher.schedules %}
+        <li>{{ schedule.start_time }} - {{ schedule.end_time }}</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No schedules assigned.</p>
+    {% endif %}
+
+    <a href="/eSchool/public/teachers" class="btn btn-secondary mt-3">Back to Teachers List</a>
+</div>
+{% endblock %}

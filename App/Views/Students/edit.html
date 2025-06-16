@@ -1,0 +1,59 @@
+{% extends "layout/appLayout.html" %}
+
+{% block title %}Edit Student{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Edit Student</h2>
+
+    <form action="/eSchool/public/students/update" method="POST">
+        <input type="hidden" name="id" value="{{ student.id }}">
+
+        <div class="mb-3">
+            <label for="user_id" class="form-label">Select User</label>
+            <select name="user_id" id="user_id" class="form-select" required>
+                <option value="" disabled>Select a user</option>
+                {% for user in users %}
+                    <option value="{{ user.id }}" {% if user.id == student.user_id %}selected{% endif %}>
+                        {{ user.name }} ({{ user.email }})
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="class_id" class="form-label">Select Class(es)</label>
+            <select name="class_id[]" id="class_id" class="form-select" multiple required>
+                {% set selected_ids = student.classes|map(c => c.id) %}
+                {% for class in classes %}
+                    <option value="{{ class.id }}" {% if class.id in selected_ids %}selected{% endif %}>
+                        {{ class.name }}
+                    </option>
+                {% endfor %}
+            </select>
+            <small class="form-text text-muted">Hold Ctrl (Windows) or Cmd (Mac) to select multiple classes.</small>
+        </div>
+
+        <div class="mb-3">
+            <label for="gender" class="form-label">Gender</label>
+            <select class="form-select" id="gender" name="gender" required>
+                <option value="" disabled>Select gender</option>
+                {% for key, label in genders %}
+                    <option value="{{ key }}" {% if key == student.gender %}selected{% endif %}>
+                        {{ label }}
+                    </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="date_of_birth" class="form-label">Date of Birth</label>
+            <input type="date" name="date_of_birth" id="date_of_birth" class="form-control" 
+                   value="{{ student.date_of_birth|date('Y-m-d') }}" required>
+        </div>
+
+        <button type="submit" class="btn btn-success">Update</button>
+        <a href="/eSchool/public/students" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "layout/appLayout.html" %}
+
+{% block title %}Edit Event{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Edit Event</h2>
+
+    <form action="/eSchool/public/events/update" method="POST">
+        <input type="hidden" name="id" value="{{ event.id }}">
+
+        <div class="mb-3">
+            <label for="title" class="form-label">Event Title</label>
+            <input type="text" name="title" id="title" class="form-control" required value="{{ event.title }}">
+        </div>
+
+        <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea name="description" id="description" class="form-control" rows="4" required>{{ event.description }}</textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="event_date" class="form-label">Event Date</label>
+            <input type="date" name="event_date" id="event_date" class="form-control" required value="{{ event.event_date|date('Y-m-d') }}">
+        </div>
+
+        <button type="submit" class="btn btn-success">Update</button>
+        <a href="/eSchool/public/events" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

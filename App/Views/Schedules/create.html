@@ -1,0 +1,66 @@
+{% extends "layout/appLayout.html" %}
+
+{% block title %}Add New Schedule{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Add New Schedule</h2>
+
+    <form action="/eSchool/public/schedules/store" method="POST">
+
+        <div class="mb-3">
+            <label for="class_id" class="form-label">Select Class</label>
+            <select name="class_id" id="class_id" class="form-select" required>
+                <option value="" disabled selected>Select a class</option>
+                {% for class in classes %}
+                    <option value="{{ class.id }}">{{ class.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="subject_id" class="form-label">Select Subject</label>
+            <select name="subject_id" id="subject_id" class="form-select" required>
+                <option value="" disabled selected>Select a subject</option>
+                {% for subject in subjects %}
+                    <option value="{{ subject.id }}">{{ subject.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="teacher_id" class="form-label">Select Teacher</label>
+            <select name="teacher_id" id="teacher_id" class="form-select" required>
+                <option value="" disabled selected>Select a teacher</option>
+                {% for teacher in teachers %}
+                    <option value="{{ teacher.id }}">{{ teacher.user.first_name }} {{ teacher.user.last_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="day_of_week" class="form-label">Day of Week</label>
+            <select name="day_of_week" id="day_of_week" class="form-select" required>
+                <option value="" disabled selected>Select a day</option>
+                {% set days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'] %}
+                {% for day in days %}
+                    <option value="{{ day }}">{{ day }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="start_time" class="form-label">Start Time</label>
+            <input type="time" name="start_time" id="start_time" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="end_time" class="form-label">End Time</label>
+            <input type="time" name="end_time" id="end_time" class="form-control" required>
+        </div>
+
+        <button type="submit" class="btn btn-success">Save</button>
+        <a href="/eSchool/public/schedules" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

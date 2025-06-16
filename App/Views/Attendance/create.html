@@ -1,0 +1,84 @@
+{% extends "layout/appLayout.html" %}
+
+{% block content %}
+<h1><i class="bi bi-journal-plus me-2"></i>Add Attendance</h1>
+
+<form action="/eSchool/public/attendance/store" method="post" novalidate>
+
+  <div class="mb-3">
+    <label for="student_id" class="form-label">Student</label>
+    <select id="student_id" name="student_id" class="form-select{% if errors.student_id is defined %} is-invalid{% endif %}" required>
+      <option value="" disabled {% if old.student_id is not defined %}selected{% endif %}>Select student</option>
+      {% for student in students %}
+        <option value="{{ student.id }}" {% if old.student_id is defined and old.student_id == student.id %}selected{% endif %}>
+          {{ student.user.first_name }}
+        </option>
+      {% endfor %}
+    </select>
+    {% if errors.student_id is defined %}
+      <div class="invalid-feedback">{{ errors.student_id }}</div>
+    {% endif %}
+  </div>
+
+  <div class="mb-3">
+    <label for="class_id" class="form-label">Class</label>
+    <select id="class_id" name="class_id" class="form-select{% if errors.class_id is defined %} is-invalid{% endif %}" required>
+      <option value="" disabled {% if old.class_id is not defined %}selected{% endif %}>Select class</option>
+      {% for class in classes %}
+        <option value="{{ class.id }}" {% if old.class_id is defined and old.class_id == class.id %}selected{% endif %}>
+          {{ class.name }}
+        </option>
+      {% endfor %}
+    </select>
+    {% if errors.class_id is defined %}
+      <div class="invalid-feedback">{{ errors.class_id }}</div>
+    {% endif %}
+  </div>
+
+  <div class="mb-3">
+    <label for="subject_id" class="form-label">Subject</label>
+    <select id="subject_id" name="subject_id" class="form-select{% if errors.subject_id is defined %} is-invalid{% endif %}" required>
+      <option value="" disabled {% if old.subject_id is not defined %}selected{% endif %}>Select subject</option>
+      {% for subject in subjects %}
+        <option value="{{ subject.id }}" {% if old.subject_id is defined and old.subject_id == subject.id %}selected{% endif %}>
+          {{ subject.name }}
+        </option>
+      {% endfor %}
+    </select>
+    {% if errors.subject_id is defined %}
+      <div class="invalid-feedback">{{ errors.subject_id }}</div>
+    {% endif %}
+  </div>
+
+  <div class="mb-3">
+    <label for="date" class="form-label">Date & Time</label>
+    <input 
+      type="datetime-local" 
+      id="date" 
+      name="date" 
+      class="form-control{% if errors.date is defined %} is-invalid{% endif %}" 
+      value="{{ old.date|default('') }}" 
+      required
+    >
+    {% if errors.date is defined %}
+      <div class="invalid-feedback">{{ errors.date }}</div>
+    {% endif %}
+  </div>
+
+  <div class="mb-3">
+    <label for="status" class="form-label">Status</label>
+    <select id="status" name="status" class="form-select{% if errors.status is defined %} is-invalid{% endif %}" required>
+      <option value="" disabled {% if old.status is not defined %}selected{% endif %}>Select status</option>
+      <option value="present" {% if old.status is defined and old.status == 'present' %}selected{% endif %}>Present</option>
+      <option value="absent" {% if old.status is defined and old.status == 'absent' %}selected{% endif %}>Absent</option>
+      <option value="late" {% if old.status is defined and old.status == 'late' %}selected{% endif %}>Late</option>
+    </select>
+    {% if errors.status is defined %}
+      <div class="invalid-feedback">{{ errors.status }}</div>
+    {% endif %}
+  </div>
+
+  <button type="submit" class="btn btn-success">Save</button>
+  <a href="/eSchool/public/attendance" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}

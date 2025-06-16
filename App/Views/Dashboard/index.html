@@ -1,0 +1,108 @@
+{% extends "layout/appLayout.html" %}
+
+{% block title %}eSchool Admin Dashboard{% endblock %}
+
+{% block content %}
+
+
+      <main class="container-fluid">
+        <div class="row g-4 px-3 px-md-4 mt-3">
+          <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card text-white gradient-blue">
+              <div class="card-body">
+                <h6 class="card-title">Students</h6>
+                <h2>{{ totalStudents }} </h2>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card text-white gradient-green">
+              <div class="card-body">
+                <h6 class="card-title">Teachers</h6>
+                <h2>{{ totalTeachers }}</h2>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card text-white gradient-orange">
+              <div class="card-body">
+                <h6 class="card-title">Classes</h6>
+                <h2>{{ totalClasses }}</h2>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+            <div class="card text-white gradient-red">
+              <div class="card-body">
+                <h6 class="card-title">Subjects</h6>
+                <h2>{{ totalSubjects }}</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Activities and Quick Actions -->
+        <div class="row mt-5 px-3 px-md-4">
+          <div class="col-12 col-lg-6 mb-4 mb-lg-0">
+            <div class="card shadow-sm">
+              <div class="card-header bg-gradient-primary  text-white">
+                <h6 class="mb-0">Recent Activities</h6>
+              </div>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">Student <strong>Ermal Ramadani</strong> enrolled in Math 101.</li>
+                <li class="list-group-item">Teacher <strong>Filan Fistek</strong> updated the syllabus for Physics.</li>
+                <li class="list-group-item">New subject <strong>"Biology Basics"</strong> added by Admin.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="col-12 col-lg-6">
+            <div class="card shadow-sm">
+              <div class="card-header bg-gradient-primary  text-white">
+                <h6 class="mb-0">Quick Actions</h6>
+              </div>
+              <div class="card-body">
+                <div class="d-grid gap-2">
+                  <a href="/eSchool/public/students/create" class="btn btn-outline-primary"><i class="bi bi-person-plus me-2"></i>Add New Student</a>
+                  <a href="/eSchool/public/teachers/create" class="btn btn-outline-success"><i class="bi bi-person-badge me-2"></i>Add New Teacher</a>
+                  <a href="/eSchool/public/subjects" class="btn btn-outline-warning"><i class="bi bi-book me-2"></i>Manage Subjects</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Statistics Chart and Upcoming Events -->
+        <div class="row mt-4 px-3 px-md-4">
+          <div class="col-12 col-lg-8 mb-4 mb-lg-0">
+            <div class="card shadow-sm">
+              <div class="card-header bg-gradient-primary  text-white">
+                <h6 class="mb-0">Enrollment Statistics</h6>
+              </div>
+              <div class="card-body">
+                <canvas id="enrollmentChart" width="400" height="300" style="width: 100%; height: 300px;"></canvas>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-lg-4">
+            <div class="card shadow-sm">
+              <div class="card-header bg-gradient-primary text-white">
+                <h6 class="mb-0">Upcoming Events</h6>
+              </div>
+              <ul class="list-group list-group-flush">
+                {% for event in events %}
+                  <li class="list-group-item">
+                    <strong>{{ event.event_date|date('M d') }}:</strong> {{ event.title }}
+                  </li>
+                {% else %}
+                  <li class="list-group-item">No upcoming events.</li>
+                {% endfor %}
+              </ul>
+            </div>
+          </div>
+
+          
+        </div>
+      </main>
+   {% endblock %}

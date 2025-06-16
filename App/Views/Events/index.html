@@ -1,0 +1,48 @@
+{% extends "layout/appLayout.html" %}
+
+{% block title %}Events{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4"><i class="bi bi-calendar-event me-2"></i>Events</h2>
+    {% if events is empty %}
+        <p>No events found.</p>
+    {% else %}
+
+    {% if message %}
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
+    
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Event Date</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for event in events %}
+            <tr>
+                <td>{{ event.title }}</td>
+                <td>{{ event.description|length > 50 ? event.description[:50] ~ '...' : event.description }}</td>
+                <td>{{ event.event_date|date("Y-m-d") }}</td>
+                <td>
+                    <a href="/eSchool/public/events/edit?id={{ event.id }}" class="btn btn-sm btn-warning">Edit</a>
+
+                    <form action="/eSchool/public/events/delete" method="POST" style="display:inline-block;" onsubmit="return confirm('Are you sure you want to delete this event?');">
+                        <input type="hidden" name="id" value="{{ event.id }}">
+                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+</div>
+{% endblock %}

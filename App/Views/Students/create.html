@@ -1,0 +1,50 @@
+{% extends "layout/appLayout.html" %}
+
+{% block title %}Add New Student{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Add New Student</h2>
+
+    <form action="/eSchool/public/students/store" method="POST">
+
+        <div class="mb-3">
+            <label for="user_id" class="form-label">Select User</label>
+            <select name="user_id" id="user_id" class="form-select" required>
+                <option value="" selected disabled>Select a user</option>
+                {% for user in users %}
+                    <option value="{{ user.id }}">{{ user.name }} ({{ user.email }})</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="class_id" class="form-label">Select Class(es)</label>
+            <select name="class_id[]" id="class_id" class="form-select" multiple required>
+                {% for class in classes %}
+                    <option value="{{ class.id }}">{{ class.name }}</option>
+                {% endfor %}
+            </select>
+            <small class="form-text text-muted">Hold Ctrl (Windows) or Cmd (Mac) to select multiple classes.</small>
+        </div>
+
+        <div class="mb-3">
+            <label for="gender" class="form-label">Gender</label>
+            <select class="form-select" id="gender" name="gender" required>
+                <option value="" selected disabled>Select gender</option>
+                {% for key, label in genders %}
+                <option value="{{ key }}">{{ label }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="date_of_birth" class="form-label">Date of Birth</label>
+            <input type="date" name="date_of_birth" id="date_of_birth" class="form-control" required>
+        </div>
+
+        <button type="submit" class="btn btn-success">Save</button>
+        <a href="/eSchool/public//students" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

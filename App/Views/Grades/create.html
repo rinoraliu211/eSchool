@@ -1,0 +1,45 @@
+{% extends "layout/appLayout.html" %}
+
+{% block title %}Add New Grade{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2 class="mb-4">Add New Grade</h2>
+
+    <form action="/eSchool/public/grades/store" method="POST">
+
+        <div class="mb-3">
+            <label for="student_id" class="form-label">Select Student</label>
+            <select name="student_id" id="student_id" class="form-select" required>
+                <option value="" disabled selected>Select a student</option>
+                {% for student in students %}
+                    <option value="{{ student.id }}">{{ student.user.first_name }} {{ student.user.last_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="subject_id" class="form-label">Select Subject</label>
+            <select name="subject_id" id="subject_id" class="form-select" required>
+                <option value="" disabled selected>Select a subject</option>
+                {% for subject in subjects %}
+                    <option value="{{ subject.id }}">{{ subject.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label for="grade" class="form-label">Grade</label>
+            <input type="text" name="grade" id="grade" class="form-control" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="exam_date" class="form-label">Exam Date</label>
+            <input type="date" name="exam_date" id="exam_date" class="form-control" required>
+        </div>
+
+        <button type="submit" class="btn btn-success">Save</button>
+        <a href="/eSchool/public/grades" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

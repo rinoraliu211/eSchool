@@ -1,0 +1,96 @@
+{% extends 'layout/appLayout.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>Student Details</h2>
+
+    <div class="card mt-4">
+        <div class="card-header bg-primary text-white">Basic Information</div>
+        <div class="card-body">
+            <p><strong>Name:</strong> {{ student.user.first_name }} {{ student.user.last_name }}</p>
+            <p><strong>Email:</strong> {{ student.user.email }}</p>
+            <p><strong>Gender:</strong> {{ student.gender|capitalize }}</p>
+            <p><strong>Date of Birth:</strong> {{ student.date_of_birth|date('Y-m-d') }}</p>
+        </div>
+    </div>
+
+    <div class="card mt-4">
+        <div class="card-header bg-success text-white">Enrolled Classes</div>
+        <div class="card-body">
+            <ul class="list-group">
+                {% for class in student.classes %}
+                <li class="list-group-item">{{ class.name }}</li>
+                {% else %}
+                <li class="list-group-item text-muted">No classes enrolled</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+    <div class="card mt-4">
+        <div class="card-header bg-warning text-dark">Grades</div>
+        <div class="card-body">
+            {% if student.grades %}
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Subject</th>
+                        <th>Grade</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for grade in student.grades %}
+                    <tr>
+                        <td>{{ grade.subject.name }}</td>
+                        <td>{{ grade.grade }}</td>
+                        <td>{{ grade.created_at|date('Y-m-d') }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <p class="text-muted">No grades recorded.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="card mt-4 mb-5">
+        <div class="card-header bg-danger text-white">Attendance</div>
+        <div class="card-body">
+            {% if student.attendance %}
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for record in student.attendance %}
+                    <tr>
+                        <td>{{ record.date|date('Y-m-d') }}</td>
+                        <td>{{ record.status|capitalize }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <p class="text-muted">No attendance records.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-end gap-2 mt-4 mb-5">
+        <a href="/eSchool/public/students" class="btn btn-secondary">
+            <i class="bi bi-arrow-left"></i> Back
+        </a>
+        <a href="/eSchool/public/students/print?id={{ student.id }}" class="btn btn-outline-primary">
+            <i class="bi bi-file-earmark-pdf"></i> Print PDF
+        </a>
+    </div>
+
+    
+
+</div>
+{% endblock %}
